@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/filter", (function(a){return {data:[{filteredData:a}],fetch:{},mutations:a}}(void 0)));
