@@ -38,7 +38,19 @@ export default {
       "Access-Control-Allow-Origin": "*",
     },
   },
-
+  sitemap: {
+    hostname: "https://nataliapuig.github.io/CAV-test/",
+    gzip: true,
+    routes: [
+      "/",
+      "/about",
+      "/filter",
+      "/details/dotnetdot/",
+      "/details/frontend_cluster/",
+      "/details/php_lovers/",
+      "/details/pythonises/",
+    ],
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 };
