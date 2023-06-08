@@ -1,10 +1,8 @@
 <script>
 export default {
   async asyncData({ params, redirect, error, $axios, $claims }) {
-    const data = await fetch("https://bibliotech.bymotto.com/api/searcher")
-      .then((res) => res.json())
-      .then((data) => data.data);
-    return { data };
+    const filteredData = $axios.$post("/api/searcher", {});
+    return { filteredData: filteredData.data };
   },
   data() {
     return { nameName: "", description: "", filteredData: [] };
@@ -13,35 +11,34 @@ export default {
   methods: {
     async applyFilters() {
       console.log("apply filters");
-      const response = await fetch(
-        "https://bibliotech.bymotto.com/api/searcher",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            name: this.nameName,
-            description: this.description,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      this.filteredData = await response.json();
-      this.filteredData = this.filteredData.data;
+      // const response = await fetch(
+      //   "https://bibliotech.bymotto.com/api/searcher",
+      //   {
+      //     method: "GET",
+      //     body: JSON.stringify({
+      //       name: this.nameName,
+      //       description: this.description,
+      //     }),
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
+      // this.filteredData = await response.json();
+      // this.filteredData = this.filteredData.data;
 
-      //   this.data = await fetch(
-      //     `https://bibliotech.bymotto.com/api/searcher?name=${this.nameName}&description=${this.description}`,
-      //     {
-      //       method: "POST",
-      //       body: JSON.stringify({
-      //         name: this.nameName,
-      //         description: this.description,
-      //       }),
-      //     }
-      //   )
-      //     .then((res) => res.json())
-      //     .then((data) => data.data);
-      //   console.log("fata", this.data);
+      try {
+        const response = await this.$axios.$post("/api/searcher", {
+          name: this.nameName,
+          description: this.description,
+        });
+
+        // Haz algo con los datos recibidos, por ejemplo, actualiza una propiedad en tu componente.
+        this.filteredData = response.data;
+      } catch (error) {
+        console.error(error);
+      }
+      console.log("fata", this.filteredData);
     },
   },
 };
